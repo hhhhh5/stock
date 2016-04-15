@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 /*
 HCK 制作
 */
+=======
+/**
+ * Created by 王彪 on 2016/4/13.
+ */
+/*HCK modify */
+>>>>>>> hck
 function myf(){
     var s = document.getElementById("gp").value;//获取搜索框中的值
 
