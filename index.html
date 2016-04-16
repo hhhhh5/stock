@@ -1,37 +1,10 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <html>
 	<head>
+		<link rel="stylesheet" href="css.css">
 		<meta charset="utf-8" />
 		<title></title>
-		<script>
-		function loadXMLDoc()
-		{
-			var xmlhttp;
- 			xmlhttp=new XMLHttpRequest();
- 			var input=document.getElementById('input').value;
- 			var url="http://apis.baidu.com/apistore/stockservice/hkstock?stockid="+input+"&list=1";
-			xmlhttp.open("get",url,false);
-			xmlhttp.setRequestHeader("apikey","78d60894737458c76fe87ce4c8b0be71");
-			xmlhttp.send();
-			var obj = eval ("(" + xmlhttp.responseText + ")");
-			
-			document.getElementById('name').innerHTML=obj.retData.stockinfo[0].name;
-			document.getElementById('code').innerHTML=obj.retData.stockinfo[0].code;
-			document.getElementById('date').innerHTML=obj.retData.stockinfo[0].date;
-			document.getElementById('openningPrice').innerHTML=obj.retData.stockinfo[0].openningPrice;
-			document.getElementById('closingPrice').innerHTML=obj.retData.stockinfo[0].closingPrice;
-			document.getElementById('hPrice').innerHTML=obj.retData.stockinfo[0].hPrice;
-			document.getElementById('lPrice').innerHTML=obj.retData.stockinfo[0].lPrice;
-			document.getElementById('currentPrice').innerHTML=obj.retData.stockinfo[0].currentPrice;
-			document.getElementById('growth').innerHTML=obj.retData.stockinfo[0].growth;
-			document.getElementById('growthPercent').innerHTML=obj.retData.stockinfo[0].growthPercent;
-			document.getElementById('dealnumber').innerHTML=obj.retData.stockinfo[0].dealnumber;
-			document.getElementById('turnover').innerHTML=obj.retData.stockinfo[0].turnover;
-}
-	</script>
-	</style>
+		<script src="main.js"></script>
 	</head>
 	<body>
 		<input id="input" />
@@ -52,26 +25,37 @@
 				成交金额：<span id="turnover"></span><br>
 			</div>
 		</div>
-
 	</body>
+	<script>
+			function loadXMLDoc()
+			{
+				var xmlhttp;
+				xmlhttp=new XMLHttpRequest();
+				var input=document.getElementById('input').value;
+				var url="http://apis.baidu.com/apistore/stockservice/hkstock?stockid="+input+"&list=1";
+				xmlhttp.open("get",url,false);
+				xmlhttp.setRequestHeader("apikey","78d60894737458c76fe87ce4c8b0be71");
+				xmlhttp.send();
+				var obj = eval ("(" + xmlhttp.responseText + ")");
 
+				document.getElementById('name').innerHTML=obj.retData.stockinfo[0].name;
+				document.getElementById('code').innerHTML=obj.retData.stockinfo[0].code;
+				document.getElementById('date').innerHTML=obj.retData.stockinfo[0].date;
+				document.getElementById('openningPrice').innerHTML=obj.retData.stockinfo[0].openningPrice;
+				document.getElementById('closingPrice').innerHTML=obj.retData.stockinfo[0].closingPrice;
+				document.getElementById('hPrice').innerHTML=obj.retData.stockinfo[0].hPrice;
+				document.getElementById('lPrice').innerHTML=obj.retData.stockinfo[0].lPrice;
+				document.getElementById('currentPrice').innerHTML=obj.retData.stockinfo[0].currentPrice;
+				document.getElementById('growth').innerHTML=obj.retData.stockinfo[0].growth;
+				document.getElementById('growthPercent').innerHTML=obj.retData.stockinfo[0].growthPercent;
+				document.getElementById('dealnumber').innerHTML=obj.retData.stockinfo[0].dealnumber;
+				document.getElementById('turnover').innerHTML=obj.retData.stockinfo[0].turnover;
+			}
+		</script>
 </html>
-=======
-=======
->>>>>>> c6534cbeaa4c8bb7aac0f99a793802a444af6de8
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="css.css">
-</head>
-<body>
 
-</body>
-<script src="main.js"></script>
-<<<<<<< HEAD
-</html>
->>>>>>> c6534cbeaa4c8bb7aac0f99a793802a444af6de8
-=======
-</html>
->>>>>>> c6534cbeaa4c8bb7aac0f99a793802a444af6de8
+
+
+
+
+
