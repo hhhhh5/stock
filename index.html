@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<html>
+	<head>
+		<link rel="stylesheet" href="css.css">
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="main.js"></script>
+	</head>
+	<body>
+		<input id="input" type="text" url="true" onkeyup="FillUrls()"/>
+		<button onclick="loadXMLDoc()">submit</button>
+		<div id="hint" style="position: fixed;top:20px;left:30px;"></div>
+		<div id="myDiv">
+			<div id="info">
+				名称：<span id="name"></span><br>
+				股票代码：<span id="code"></span><br>
+				日期：<span id="date"></span><br>
+				开盘价：<span id="openningPrice"></span><br>
+				昨日收盘价：<span id="closingPrice"></span><br>
+				今日最高价：<span id="hPrice"></span><br>
+				今日最低价：<span id="lPrice"></span><br>
+				当前价：<span id="currentPrice"></span><br>
+				价格涨幅：<span id="growth"></span><br>
+				价格涨幅比例（%）：<span id="growthPercent"></span><br>
+				成交量股：<span id="dealnumber"></span><br>
+				成交金额：<span id="turnover"></span><br>
+			</div>
+		</div>
+	</body>
+	<script src="dist/jquery-2.1.4.min.js"></script>
+	<script src="main.js"></script>
+	<script>
 
-</body>
+			function loadXMLDoc()
+			{
+				$("#hint").html("");
+				var xmlhttp;
+				xmlhttp=new XMLHttpRequest();
+				var input=document.getElementById('input').value;
+				var url="http://apis.baidu.com/apistore/stockservice/hkstock?stockid="+input+"&list=1";
+				xmlhttp.open("get",url,false);
+				xmlhttp.setRequestHeader("apikey","78d60894737458c76fe87ce4c8b0be71");
+				xmlhttp.send();
+				var obj = eval ("(" + xmlhttp.responseText + ")");
+
+				document.getElementById('name').innerHTML=obj.retData.stockinfo[0].name;
+				document.getElementById('code').innerHTML=obj.retData.stockinfo[0].code;
+				document.getElementById('date').innerHTML=obj.retData.stockinfo[0].date;
+				document.getElementById('openningPrice').innerHTML=obj.retData.stockinfo[0].openningPrice;
+				document.getElementById('closingPrice').innerHTML=obj.retData.stockinfo[0].closingPrice;
+				document.getElementById('hPrice').innerHTML=obj.retData.stockinfo[0].hPrice;
+				document.getElementById('lPrice').innerHTML=obj.retData.stockinfo[0].lPrice;
+				document.getElementById('currentPrice').innerHTML=obj.retData.stockinfo[0].currentPrice;
+				document.getElementById('growth').innerHTML=obj.retData.stockinfo[0].growth;
+				document.getElementById('growthPercent').innerHTML=obj.retData.stockinfo[0].growthPercent;
+				document.getElementById('dealnumber').innerHTML=obj.retData.stockinfo[0].dealnumber;
+				document.getElementById('turnover').innerHTML=obj.retData.stockinfo[0].turnover;
+			}
+			//加载列表
+			function FillUrls() {
+				var strdomin = $("#input").val();
+				var qsData = { 'wd': strdomin, 'p': '3', 'cb': 'ShowDiv', 't': '1324113456725' };
+				$.ajax({
+					async: false,
+					url: "http://suggestion.baidu.com/su",
+					type: "GET",
+					dataType: 'jsonp',
+					jsonp: 'jsoncallback',
+					data: qsData,
+					timeout: 5000,
+					success: function (json) {
+						console.log(json);
+					}
+
+				});
+			}
+			var urls;
+			function ShowDiv(strurls) {
+				$("#hint").html("");
+				urls = strurls["s"];
+				console.log(urls);
+				if(urls!=[]){
+					for(var i=0;i<urls.length;i++){
+						$("#hint").append("<a href='#' onclick='getText("+i+")'id='t"+i+"'><div  >"+urls[i]+"</div></a>");
+					}
+				}
+
+			}
+		function getText(a){
+			$("#input").val($("#t"+a).text());
+			$("#hint").html("");
+		}
+
+	</script>
 </html>
+
+
+
+
+
+
