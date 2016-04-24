@@ -21,7 +21,13 @@ function myf(){
 var url;
 var stockId;
 var stockF;
+if(localStorage.getItem('stockF')){
+    $('#stockId').val(localStorage.getItem("stockId"));
+    $('#stockF').val(localStorage.getItem("stockF"));
+}
+
 $('.btn').click(function(){
+    $(this).text('loading...').attr('disabled', 'disabled');
     stockF=$('#stockF').val();
     if(stockF=="港股"){
         url="http://apis.baidu.com/apistore/stockservice/hkstock";
@@ -33,6 +39,14 @@ $('.btn').click(function(){
         url="http://apis.baidu.com/apistore/stockservice/stock";
     }
     stockId=$('#stockId').val();
+    if(stockId==""){
+        alert("股票代码不能为空");
+        $('.btn').text("查询").removeAttr("disabled");
+        return;
+    }
+    console.log(stockId);
+    localStorage.setItem('stockId',stockId);
+    localStorage.setItem('stockF',stockF);
     $.ajax({
         url:url,
         type:"GET",
@@ -51,6 +65,7 @@ $('.btn').click(function(){
     })
 })
 function success(data){
+    $('.btn').text("查询").removeAttr("disabled");
     console.log(data);
     var html="";
     for(var i in data.retData.stockinfo[0]){
@@ -58,6 +73,7 @@ function success(data){
     }
     $('#pageBox2').html(html);
     $('#pageBox2').css('display','block');
+
 }
 
 
