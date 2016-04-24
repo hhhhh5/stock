@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-/*
-HCK 制作
-*/
-=======
-/**
- * Created by 王彪 on 2016/4/13.
- */
-/*HCK modify */
->>>>>>> hck
+
 function myf(){
-    var s = document.getElementById("gp").value;//获取搜索框中的值
+    var s = document.getElementById("stockId").value;//获取搜索框中的值
 
     if(s.length!=0)
     {
@@ -27,3 +18,46 @@ function myf(){
         alert("请输入股票名或股票代码！")
     }
 }
+var url;
+var stockId;
+var stockF;
+$('.btn').click(function(){
+    stockF=$('#stockF').val();
+    if(stockF=="港股"){
+        url="http://apis.baidu.com/apistore/stockservice/hkstock";
+    }
+    if(stockF=="美股"){
+        url="http://apis.baidu.com/apistore/stockservice/usastock";
+    }
+    if(stockF=="股票"){
+        url="http://apis.baidu.com/apistore/stockservice/stock";
+    }
+    stockId=$('#stockId').val();
+    $.ajax({
+        url:url,
+        type:"GET",
+        data:{
+            'stockid':stockId,
+            'list':1
+        },
+        headers:{
+            'apikey':'2eae391e139639cc1fa9e11d39518c72'
+        },
+        success:success,
+        error:function(err){
+            alert(err.Msg)
+        }
+
+    })
+})
+function success(data){
+    console.log(data);
+    var html="";
+    for(var i in data.retData.stockinfo[0]){
+        html+="<div><label>"+i+":"+"</label><span>"+data.retData.stockinfo[0][i]+"</span></div>"
+    }
+    $('#pageBox2').html(html);
+    $('#pageBox2').css('display','block');
+}
+
+

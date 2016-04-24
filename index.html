@@ -1,61 +1,60 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" href="css.css">
-		<meta charset="utf-8" />
-		<title></title>
-		<script src="main.js"></script>
-	</head>
-	<body>
-		<input id="input" />
-		<button onclick="loadXMLDoc()">submit</button>
-		<div id="myDiv">
-			<div id="info">
-				名称：<span id="name"></span><br>
-				股票代码：<span id="code"></span><br>
-				日期：<span id="date"></span><br>
-				开盘价：<span id="openningPrice"></span><br>
-				昨日收盘价：<span id="closingPrice"></span><br>
-				今日最高价：<span id="hPrice"></span><br>
-				今日最低价：<span id="lPrice"></span><br>
-				当前价：<span id="currentPrice"></span><br>
-				价格涨幅：<span id="growth"></span><br>
-				价格涨幅比例（%）：<span id="growthPercent"></span><br>
-				成交量股：<span id="dealnumber"></span><br>
-				成交金额：<span id="turnover"></span><br>
-			</div>
-		</div>
-	</body>
-	<script>
-			function loadXMLDoc()
-			{
-				var xmlhttp;
-				xmlhttp=new XMLHttpRequest();
-				var input=document.getElementById('input').value;
-				var url="http://apis.baidu.com/apistore/stockservice/hkstock?stockid="+input+"&list=1";
-				xmlhttp.open("get",url,false);
-				xmlhttp.setRequestHeader("apikey","78d60894737458c76fe87ce4c8b0be71");
-				xmlhttp.send();
-				var obj = eval ("(" + xmlhttp.responseText + ")");
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>股票信息查询</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<link rel="stylesheet" href="bootstrap-3.3.5/css/bootstrap.min.css">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+			font-size: 100%;
+			font-family: "Microsoft Yahei", Arial;
+		}
+		#pageBox1{
+			margin-top: 10%;
+			width: 100%;
+			display: block;
+		}
+		label{
+			margin-top: 10px;
+		}
+		#serch{
+			width: 100%;
+			text-align: center;
+		}
+		#pageBox2{
+			display: none;
+		}
 
-				document.getElementById('name').innerHTML=obj.retData.stockinfo[0].name;
-				document.getElementById('code').innerHTML=obj.retData.stockinfo[0].code;
-				document.getElementById('date').innerHTML=obj.retData.stockinfo[0].date;
-				document.getElementById('openningPrice').innerHTML=obj.retData.stockinfo[0].openningPrice;
-				document.getElementById('closingPrice').innerHTML=obj.retData.stockinfo[0].closingPrice;
-				document.getElementById('hPrice').innerHTML=obj.retData.stockinfo[0].hPrice;
-				document.getElementById('lPrice').innerHTML=obj.retData.stockinfo[0].lPrice;
-				document.getElementById('currentPrice').innerHTML=obj.retData.stockinfo[0].currentPrice;
-				document.getElementById('growth').innerHTML=obj.retData.stockinfo[0].growth;
-				document.getElementById('growthPercent').innerHTML=obj.retData.stockinfo[0].growthPercent;
-				document.getElementById('dealnumber').innerHTML=obj.retData.stockinfo[0].dealnumber;
-				document.getElementById('turnover').innerHTML=obj.retData.stockinfo[0].turnover;
-			}
-		</script>
+	</style>
+</head>
+<body>
+<div id="pageBox1">
+	<div class="form-group " >
+		<label>选择要查询的股票来源</label>
+		<select class="form-control input-lg" id="stockF">
+			<option>港股</option>
+			<option>美股</option>
+			<option>股票</option>
+		</select>
+		<label>输入要查询的股票代码</label>
+		<input class="form-control input-lg" type="text" placeholder="输入股票代码" id="stockId">
+	</div>
+	<div id="serch">
+		<button class="btn bg-primary">查询</button>
+	</div>
+</div>
+<div id="pageBox2">
+
+</div>
+</body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/main.js"></script>
+
 </html>
-
-
-
-
-
-
