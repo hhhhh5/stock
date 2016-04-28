@@ -67,6 +67,10 @@ $('.btn').click(function(){
 function success(data){
     $('.btn').text("查询").removeAttr("disabled");
     console.log(data);
+    if(data.retData.stockinfo[0].name==""){
+        alert("请输入正确的股票代码");
+        return;
+    }
     var html="";
     for(var i in data.retData.stockinfo[0]){
         html+="<div><label>"+i+":"+"</label><span>"+data.retData.stockinfo[0][i]+"</span></div>"
